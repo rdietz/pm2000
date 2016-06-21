@@ -12,27 +12,25 @@ class Pulser
 {
 	#define IDLE_STATE		0
 	#define DELAY_STATE		1
-	#define ON_STATE		2
+	#define ON_STATE		  2
 
 	// Class Member Variables
-	int pulsePin;				// the pin we're pulsing
-	int curPulseValue;			// current output value
-	int lastPulseValue;			// last output value
+	int pulsePin;			    	  // the pin we're pulsing
+	int curPulseValue;			  // current output value
+	int lastPulseValue;			  // last output value
 	unsigned long lastMillis;	// last millisecond value
-	long delayTime;				// milliseconds of delay before on-time
-	long onTime;				// milliseconds of on-time
-	int pulseState;				// track where we are in the pulse
-	GeneralFunction callback;	// callbackfunction
+  int delayTime;            // milliseconds of delay before on-time
+  int onTime;               // milliseconds of on-time
+  
+	int pulseState;				    // track where we are in the pulse
+	GeneralFunction callback;	// callback function
 
 	// Constructor - creates a Pulser object and initialises everything
 	public:
-	Pulser(int pin, long delay, long on)
+	Pulser(int pin)
 	{
 		pulsePin = pin;
-		delayTime = delay;
-		onTime = on;
-		
-		curPulseValue = HIGH;  ///// TG
+		curPulseValue = HIGH;
 		lastMillis = 0;
 		pulseState = IDLE_STATE;
 		pinMode(pulsePin, OUTPUT);
@@ -62,7 +60,7 @@ class Pulser
 	 *
 	 * Called by the application loop to process the pulse.
 	 */
-	void Update()
+  void Update(int delayTime, int onTime)
 	{
 		// check to see if it's time to change the state of the LED
 		unsigned long curMillis = millis();
@@ -75,13 +73,13 @@ class Pulser
 				// end of delay, turn the pulse on
 				pulseState = ON_STATE;
 				lastMillis = curMillis;			// Remember the start of on-time
-				digitalWrite(pulsePin, LOW);  //////TG
+				digitalWrite(pulsePin, LOW);
 			}
 			else if (pulseState == ON_STATE && (curMillis - lastMillis >= onTime))
 			{
 				// end of on-time, turn the pulse off
 				pulseState = IDLE_STATE;
-				digitalWrite(pulsePin, HIGH);  //////TG
+				digitalWrite(pulsePin, HIGH);
 				
 				// if there is a callback function specified, call it now
 				if (callback)

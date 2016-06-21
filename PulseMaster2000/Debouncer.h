@@ -9,9 +9,9 @@ class Debouncer
 {
 	// Class Member Variables
 	// These are initialized at startup
-	int samplePin;				// the input pin to be sampled
-	int curPinValue;			// current input value
-	int lastPinValue;			// last input value
+	int samplePin;				    // the input pin to be sampled
+	int curPinValue;			    // current input value
+	int lastPinValue;			    // last input value
 	unsigned long lastMillis;	// last millisecond value
 
 	// Constructor - creates a Flasher 
@@ -20,7 +20,7 @@ class Debouncer
 	Debouncer(int pin)
 	{
 		samplePin = pin;
-		pinMode(samplePin, INPUT_PULLUP);   // TLG
+		pinMode(samplePin, INPUT_PULLUP); 
 		curPinValue = digitalRead(samplePin);
 		lastPinValue = curPinValue;
 		lastMillis = 0;

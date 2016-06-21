@@ -13,6 +13,7 @@ class Thumbwheel
 	{
 		pinMode(thumbDigit1Pin, OUTPUT); // Units
 		pinMode(thumbDigit2Pin, OUTPUT); // Tenths
+    pinMode(thumbDigit3Pin, OUTPUT); // Hundredths
 		pinMode(thumb1Pin, INPUT_PULLUP);
 		pinMode(thumb2Pin, INPUT_PULLUP);
 		pinMode(thumb4Pin, INPUT_PULLUP);
@@ -20,7 +21,8 @@ class Thumbwheel
 
 		// initialise the pins to turn selection off
 		digitalWrite(thumbDigit1Pin, HIGH);
-		digitalWrite(thumbDigit2Pin, HIGH);
+    digitalWrite(thumbDigit2Pin, HIGH);
+    digitalWrite(thumbDigit3Pin, HIGH);
 	}
 
 	/*
@@ -33,21 +35,29 @@ class Thumbwheel
 	{
 		float thumbValue;
 	
-		// Read the whole number
+		// Read the unit number
 		digitalWrite(thumbDigit1Pin, LOW);
     delay(100);
 		thumbValue = GetValue();
 		digitalWrite(thumbDigit1Pin, HIGH);
     delay(100);
 	
-		// Read the fractional number
+		// Read the tenths number
 		digitalWrite(thumbDigit2Pin, LOW);
     delay(100);
-		float fractionValue = (float) GetValue();
-		thumbValue += fractionValue / 10;
+		float tenthsValue = (float) GetValue();
+		thumbValue += tenthsValue / 10;
 		digitalWrite(thumbDigit2Pin, HIGH);
     delay(100);
-	
+
+    // Read the hundredths number
+    digitalWrite(thumbDigit3Pin, LOW);
+    delay(100);
+    float hundredthsValue = (float) GetValue();
+    thumbValue += hundredthsValue / 100;
+    digitalWrite(thumbDigit3Pin, HIGH);
+    delay(100);
+  
 		return thumbValue;
 	}
 
