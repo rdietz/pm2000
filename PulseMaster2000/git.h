@@ -1,5 +1,5 @@
-commit 50df1633ed05efdb878d0012e25da0d88e42825f
+commit f6af1aecd5f2959757b3bfa3177674c5cac9e0f1
 Author: tgillett <tgillett@gmail.com>
-Date:   Sat Jun 25 09:30:13 2016 +1000
+Date:   Sat Jun 25 09:48:43 2016 +1000
 
-    Updated schematic
+    Updated for Cal Run mode select 001
