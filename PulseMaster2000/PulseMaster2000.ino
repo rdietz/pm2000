@@ -93,7 +93,7 @@ void setup()
 
   // Check if this is a calibration run mode
   
-  if (metres == 0)
+  if (metres == 0.01)
   {
   mode = CALRUN;
   Serial.println();
