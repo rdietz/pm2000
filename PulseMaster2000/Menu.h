@@ -284,8 +284,9 @@ void do_menu()
       Serial.print(F("Distance:          ")); Serial.print(metres); Serial.println(F(" metres"));
       Serial.print(F("Relay 1:    Delay: ")); Serial.print(RELAY1_DELAY); Serial.print(F("mSec  Duration: ")); Serial.print(RELAY1_PULSE_TIME); Serial.println(F(" mSec"));
       Serial.print(F("Relay 2:    Delay: ")); Serial.print(RELAY2_DELAY); Serial.print(F("mSec  Duration: ")); Serial.print(RELAY2_PULSE_TIME); Serial.println(F(" mSec"));
-      Serial.print(F("Pulses per metre: ")); Serial.print(PULSES_PER_METRE);
-      Serial.println("\n\n");
+      Serial.print(F("Cal. Pulses per metre:  ")); Serial.println(PULSES_PER_METRE);
+      Serial.print(F("Input Pulses per metre: ")); Serial.println(PULSES_PER_METRE * 4);
+      Serial.println("\n");
       String str = Serial.readStringUntil('\n');
       show_menu();      
     }

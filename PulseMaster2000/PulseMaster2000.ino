@@ -12,8 +12,10 @@
 void setup()
 {
   MCUSR = 0;  // clear out any flags of prior resets.
-	lastButtonState = btn1.getValue();
-	attachInterrupt(gpsInterrupt, CountGPS, RISING);
+  
+  attachInterrupt(digitalPinToInterrupt(interruptPin), CountGPS, RISING);  //Set up interrupt
+
+  lastButtonState = btn1.getValue();
 	counter = 0;
 	led.On(RED);
 	isActive = false;
@@ -30,6 +32,8 @@ void setup()
   Serial.println();
   Serial.print(F("Firmware Version: ")); Serial.println(VERSION); 
   Serial.println();
+
+
 
 // Get EEPROM values
   int flag;
@@ -220,17 +224,30 @@ void loop()
 
       if (mode == CALRUN)
       {
+        long CounterCopy = counter; // Save the counter value
+        int calcount = (CounterCopy / CALDISTANCE); // Work out the pulses per metre
+
+        // Sanity check the value
+        if (calcount < 20 || calcount > 200) 
+        {
+          calcount = 99; // Set to a default if out of bounds
+        }
+        
+        PULSES_PER_METRE = calcount; // Save the working copy!!
+        
         // Save calibration
-        int calcount = (counter / CALDISTANCE);
         EEPROM.put(AddrPulses, calcount);
-        delay(500);
+        delay(100);
         // Set mode to Operate
         mode = OPERATE;
+         
+        EEPROM.get(AddrPulses, calcount);
         Serial.println();
         Serial.println(F("Ending Calibration run, setting mode to Operate"));
-        Serial.print(F("Total Count: ")); Serial.println(counter);
-        Serial.print(F("Calibration Distance: ")); Serial.println(CALDISTANCE);
-        Serial.print(F("Pulses per metre: ")); Serial.println(calcount);
+        Serial.print(F("Total Input Count:      ")); Serial.println(CounterCopy);
+        Serial.print(F("Cal Distance:     ")); Serial.println(CALDISTANCE);
+        Serial.print(F("Cal. Pulses per metre:  ")); Serial.println(calcount);
+        Serial.print(F("Input Pulses per metre: ")); Serial.println(calcount * 4);
       }
 
       if (mode == OPERATE)

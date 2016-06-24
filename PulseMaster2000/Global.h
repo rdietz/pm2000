@@ -2,8 +2,8 @@
 #define GLOBAL_H
 
 // Key variables
-volatile unsigned long counter;  // GPS pulse count
-unsigned long lastCounter;       // for checking that we're receiving GPS pulses
+volatile unsigned long counter;  // Distance pulse count
+unsigned long lastCounter;       // for checking that we're receiving Distance pulses
 int lastButtonState;             // track state of the master button
 
 int PULSES_PER_METRE;            // the number of pulses per metre travelled
