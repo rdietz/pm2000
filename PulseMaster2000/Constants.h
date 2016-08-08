@@ -4,7 +4,7 @@
 // Set up for PM2000 UNO board
 
 // Version
-#define VERSION "PM2000-UNO-Ver-1.5-Encoder"
+#define VERSION "PM2000-UNO-Ver-1.4.1-Encoder"
 
 const static float MINIMUM_DISTANCE = 1.0;        // Minimum distance in metres between trees
 
