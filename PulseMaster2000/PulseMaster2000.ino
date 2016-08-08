@@ -93,11 +93,26 @@ void setup()
 
   // Check if this is a calibration run mode
   
-  if (metres == 0.01)
+  if (metres == 0.01 || metres == 0.02 || metres == 0.03 || metres == 0.04)
   {
-  mode = CALRUN;
-  Serial.println();
-  Serial.println(F("*** Calibration Run Mode *** \n"));
+    mode = CALRUN;
+    Serial.println();
+    Serial.println(F("*** Calibration Run Mode *** \n"));
+    // Set up the calibration distance to be used
+    caldistance = 10;   // Set default 10 metres
+    if (metres == 0.02) // Set for 20 metres
+    {
+      caldistance = 20;
+    }
+    if (metres == 0.03) // Set for 30 metres
+    {
+      caldistance = 30;
+    }
+    if (metres == 0.04) // Set for 100 metres
+    {
+      caldistance = 100;
+    }
+  Serial.print(F("Calibration Distance is: ")); Serial.print(caldistance); Serial.println(F(" metres"));
   }
 
 	// Print details if in Calibrate mode
@@ -225,7 +240,7 @@ void loop()
       if (mode == CALRUN)
       {
         long CounterCopy = counter; // Save the counter value
-        int calcount = (CounterCopy / CALDISTANCE); // Work out the pulses per metre
+        int calcount = (CounterCopy / caldistance); // Work out the pulses per metre
 
         // Sanity check the value
         if (calcount < 20 || calcount > 200) 
@@ -245,7 +260,7 @@ void loop()
         Serial.println();
         Serial.println(F("Ending Calibration run, setting mode to Operate"));
         Serial.print(F("Total Input Count:      ")); Serial.println(CounterCopy);
-        Serial.print(F("Cal Distance:     ")); Serial.println(CALDISTANCE);
+        Serial.print(F("Cal Distance:     ")); Serial.println(caldistance);
         Serial.print(F("Cal. Pulses per metre:  ")); Serial.println(calcount);
         Serial.print(F("Input Pulses per metre: ")); Serial.println(calcount * 4);
       }

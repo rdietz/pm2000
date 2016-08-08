@@ -22,6 +22,7 @@ float metres;                   // required distance as set on thumbwheels
 bool isActive;                  // indicates we're actively counting GPS pulses
 bool firstcycle;                // indicates the first cycle
 int mode;                       // indicates Calibrate mode
+int caldistance;                // Calibration distance in metres
 
 
 // Setup controller objects

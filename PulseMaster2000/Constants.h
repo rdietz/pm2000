@@ -4,7 +4,7 @@
 // Set up for PM2000 UNO board
 
 // Version
-#define VERSION "PM2000-UNO-Ver-1.4-Encoder"
+#define VERSION "PM2000-UNO-Ver-1.5-Encoder"
 
 const static float MINIMUM_DISTANCE = 1.0;        // Minimum distance in metres between trees
 
@@ -14,7 +14,6 @@ const static int OPERATE = 1;
 const static int CALMODE = 2;
 const static int CALRUN = 3;
 
-const static int CALDISTANCE = 10;  // Metres for calibration run
 
 // EEPROM addresses - allow two bytes per int
 const static  int AddrFlag = 10;
